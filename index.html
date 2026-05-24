@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Épreuve Pratique de Recrutement - Développeur Web Full Stack"/>
+  <title>Développeur Recruitment Test | Full Stack</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ========== VARIABLES & RESET ========== */
+    :root {
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --text-light: #e2e8f0;
+      --text-muted: #cbd5e1;
+      --border: rgba(255, 255, 255, 0.08);
+      --spacing: 20px;
+      --radius: 16px;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ========== GLOBAL STYLES ========== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1a2f4a 100%);
+      color: var(--text-light);
+      line-height: 1.6;
+      min-height: 100vh;
+    
+    }
+
+    /* ========== TYPOGRAPHY ========== */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      color: var(--text-light);
+      margin: 2rem 0 1rem;
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin: 1.5rem 0 1rem;
+      font-weight: 600;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+background-color: #0b2e07;
+color: #0f172a;
+      padding: 80px 5%;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      margin-left: 20px;
+      margin-right: 20px;
+        
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: 0;
+    }
+
+    .hero-content {
+      max-width: 1100px;
+      margin: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--primary) 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      animation: slideInDown 0.8s ease-out;
+    }
+
+    .hero-divider {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #015670 0%, transparent 100%);
+      margin: 2rem 0;
+      animation: slideInRight 1s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: 1.8rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      animation: slideInLeft 1s ease-out;
+    }
+
+    .hero-meta {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .selection-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      margin: 2rem 0;
+      animation: slideInUp 1s ease-out;
+      backdrop-filter: blur(10px);
+    }
+
+    .selection-badge h3 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .selection-badge p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .hero-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+      gap: 2rem;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.5);
+      flex-wrap: wrap;
+    }
+
+    /* ========== TABLE OF CONTENTS ========== */
+    .toc-section {
+      padding: 80px 5%;
+      background: var(--bg-dark);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc-container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .toc-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .toc-content {
+   background-color: #e2e8f0;
+      padding: 3rem;
+      color: black;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .toc-item:last-child {
+      border-bottom: none;
+    }
+
+    .toc-item:hover {
+      padding-left: 1rem;
+      color: var(--primary);
+    }
+
+    .toc-item strong {
+      min-width: 50px;
+      text-align: right;
+    }
+
+    .toc-note {
+      margin-top: 2rem;
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: calc(var(--radius) - 4px);
+      font-size: 0.95rem;
+    }
+
+    /* ========== CONTENT SECTIONS ========== */
+    .content-section {
+      padding: 80px 5%;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content-section:nth-child(even) {
+      background: rgba(30, 41, 59, 0.5);
+    }
+
+   .content-box {
+  max-width: 1100px;
+  margin: auto;
+  background-color: white;
+  display: block;
+  color: black;
+  padding: 3.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+    .content-box h2 {
+      margin-top: 0;
+    }
+
+    /* ========== LIST STYLES ========== */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 0.8rem 0 0.8rem 2rem;
+      position: relative;
+      color: var(--text-light);
+    }
+
+    ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    /* ========== TABLE STYLES ========== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+    }
+
+    table th {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--bg-dark);
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      border-radius: 8px 8px 0 0;
+    }
+
+    table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-light);
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table tr:hover td {
+      background: rgba(56, 189, 248, 0.05);
+      transition: background 0.3s ease;
+    }
+
+    /* ========== RESPONSIVE DESIGN ========== */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 5%;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .content-box {
+        padding: 2rem;
+      }
+
+      h1, h2 {
+        font-size: 1.8rem;
+      }
+
+      .hero-footer {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .selection-badge {
+        padding: 1rem;
+      }
+
+      .toc-item:hover {
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 40px 5%;
+      }
+
+      .hero-title {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+      }
+
+      .selection-badge {
+        padding: 1rem;
+      }
+
+      .content-box {
+        padding: 1.5rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      table th, table td {
+        padding: 0.75rem;
+      }
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========== UTILITY CLASSES ========== */
+    .text-center {
+      text-align: center;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title" style="background-color: rgb(9, 56, 9); font-size: 15px;" >F  U  L  L  -  S  T  A  C  K     W  E  B     D  E  V  E  L  O  P  E  R   
+          R  E  C  R  U  I  T  M  E  N  T     T  E  S  T</h1>
+      <div class="hero-divider"></div>
+      
+      <h2 class="hero-subtitle">Épreuve Pratique de   <br>Recrutement</h2>
+      <p class="hero-meta">Développeur Web Full Stack</p>
+
+      <div class="selection-badge">
+        <h3>Processus de Sélection Final</h3>
+        <p> Durée : <br> 24 heures maximum</p>
+        <p>Statut : <br> Document confidentiel</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="hero-footer">
+        <span>Direction des Ressources Humaines</span>
+        <span>Mai 2025</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TABLE OF CONTENTS ========== -->
+  <section class="toc-section">
+    <div class="toc-container" >
+      <h1 class="toc-title">Table des Matières</h1>
+      
+      <div class="toc-content"style="text-align: center; align-items: center;justify-content: center;">
+        <div class="toc-item">
+          <span>1. Introduction .........................................................................................................................1</span>
+          
+        </div>
+        <div class="toc-item">
+          <span>2. Présentation du Poste .........................................................................................................................2</span>
+          
+        </div>
+        <div class="toc-item">
+          <span>2.1 Rôle et Responsabilités.........................................................................................................................3</span>
+        
+        </div>
+        <div class="toc-item">
+          <span>2.2 Compétences Requises.........................................................................................................................4</span>
+        
+        </div>
+        <div class="toc-item">
+          <span>3. Modalités de l'Épreuve .........................................................................................................................5</span>
+     
+        </div>
+        <div class="toc-item">
+          <span>3.1 Format et Durée .........................................................................................................................6</span>
+          
+        </div>
+        <div class="toc-item">
+          <span>3.2 Attribution des Sujets.........................................................................................................................7</span>
+       
+        </div>
+        <div class="toc-item">
+          <span>3.3 Récapitulatif des Conditions.........................................................................................................................8</span>
+          
+        </div>
+        <div class="toc-item">
+          <span>4. Sujet 1 — Import-Export.........................................................................................................................9</span>
+        
+        </div>
+        <div class="toc-item">
+          <span>5. Sujet 2 — BTP & Transport........................................................................................................................12</span>
+          
+        </div>
+        <div class="toc-item">
+          <span>6. Spécifications Techniques.........................................................................................................................15</span>
+          
+        </div>
+        <div class="toc-item">
+          <span>7. Critères d'Évaluation.........................................................................................................................22</span>
+       
+        </div>
+        <div class="toc-item">
+          <span>8. Outils et Technologies...................................................................................................................23</span>
+         
+        </div>
+        <div class="toc-item">
+          <span>9. Consignes Finales et Soumission.........................................................................................................................25</span>
+          
+        </div>
+      </div>
+
+      <div class="toc-note">
+        <strong> Note :</strong> Cette table des matières est une référence. Veuillez consulter le document dans son intégralité pour l'exactitude des détails.
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INTRODUCTION SECTION ========== -->
+  <section class="content-section">
+    <div class="content-box">
+      <h1>1. Introduction</h1>
+      <p style="color: black;">
+        Nous avons le grand plaisir de vous informer que votre candidature au poste de <strong>Développeur Web Full Stack</strong> a été retenue parmi l'ensemble des profils que nous avons étudiés.
+      </p>
+      <p style="color: black;">
+        Au cours de la première phase de notre processus de recrutement, nous avons analysé votre parcours, vos compétences techniques ainsi que vos réalisations passées, et nous sommes convaincus que votre profil présente un <strong>potentiel significatif</strong> pour rejoindre notre équipe.
+      </p>
+      <p style="color: black;">
+        Cependant, afin de compléter notre évaluation et de mesurer concrètement votre capacité à produire un travail de qualité dans des conditions réelles, nous vous invitons à participer à une <strong>épreuve pratique</strong>.
+      </p>
+      <p style="color: black;">
+        Cette dernière constitue l'étape finale de notre processus de sélection et représente une opportunité unique pour vous de démontrer l'étendue de vos compétences, votre créativité ainsi que votre aptitude à utiliser les outils modernes de développement, y compris ceux basés sur l'<strong>intelligence artificielle</strong>.
+      </p>
+      <p style="color: black;">
+        Le présent document décrit en détail les modalités de cette épreuve, les objectifs attendus, les spécifications techniques à respecter, ainsi que les critères sur lesquels vous serez évalué.
+      </p>
+      <p style="color: black;">
+        Nous vous invitons à le lire attentivement dans son intégralité avant de commencer l'épreuve. <strong>Toute question</strong> relative à ce document devra être posée avant le démarrage du chronomètre.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== JOB PRESENTATION ========== -->
+  <section class="content-section">
+    <div class="content-box">
+      <h1>2. Présentation du Poste</h1>
+      <h2 style="color: #015670;">2.1 Rôle et Responsabilités</h2>
+      <p style="color: black;">
+        Le poste de <strong>Développeur Web Full Stack</strong> au sein de notre structure implique la conception, le développement et le déploiement d'applications web complètes, depuis la couche front-end jusqu'à la couche back-end.
+      </p>
+      <p style="color: black;">
+        En tant que développeur full stack, vous serez amené à intervenir sur l'ensemble de la chaîne de production logicielle, depuis la modélisation de la base de données jusqu'à l'intégration d'interfaces utilisateur avancées.
+      </p>
+      <p style="color: black;">
+        Vos responsabilités principales incluront :
+      </p>
+      <ul >
+        <li style="color: black;">Création de sites internet et d'applications web <strong>responsives et performantes</strong></li>
+        <li style="color: black;">Intégration de services tiers (API de paiement, CMS, stockage cloud)</li>
+        <li style="color: black;">Mise en place de <strong>fonctionnalités interactives</strong> avec intelligence artificielle</li>
+        <li style="color: black;">Optimisation des performances et de l'expérience utilisateur</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== REQUIRED SKILLS ========== -->
+  <section class="content-section">
+    <div class="content-box">
+      <h2 style="color: #015670;">2.2 Compétences Requises</h2>
+      <p style="color: black;">
+        Nous recherchons un candidat maîtrisant les <strong>technologies web modernes</strong> :
+      </p>
+      <ul>
+        <li style="color: black;">HTML5, CSS3, JavaScript ES6+</li>
+        <li style="color: black;">Frameworks front-end : React, Vue.js ou Angular</li>
+        <li style="color: black;">Back-end : Node.js, Python ou PHP</li>
+        <li style="color: black;">Bases de données relationnelles et non-relationnelles</li>
+        <li style="color: black;">Outils d'intelligence artificielle pour l'accélération du développement</li>
+      </ul>
+      <p style="color: black;">
+        La maîtrise du <strong>responsive design</strong>, des normes d'accessibilité (WCAG), des méthodologies CI/CD et des pratiques de sécurité web constitue un <strong>atout considérable</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== TEST MODALITIES ========== -->
+  <section class="content-section">
+    <div class="content-box">
+      <h1>3. Modalités de l'Épreuve</h1>
+      <h2 style="color: #015670;">3.1 Format et Durée</h2>
+      <p style="color: black;">
+        L'épreuve consiste à <strong>concevoir et développer un site web complet</strong> dans un délai maximum de <strong>24 heures</strong>.
+      </p>
+      <p style="color: black;">
+        Le chronomètre démarrera dès que vous aurez pris connaissance du présent document et confirmé votre prêt à commencer.
+      </p>
+      <p style="color: black;">
+        L'épreuve se déroule <strong>entièrement à distance</strong>. L'utilisation des outils d'<strong>intelligence artificielle</strong> est fortement <strong>encouragée</strong>.
+      </p>
+
+      <h2 style="color: black;">3.2 Attribution des Sujets</h2>
+      <p style="color: black;">
+        Deux sujets distincts ont été préparés, chacun portant sur un secteur d'activité différent.
+      </p>
+      <p style="color: black;">
+        Vous êtes libre de <strong>choisir le sujet</strong> qui vous convient le mieux. <strong>Aucun échange d'informations</strong> entre candidats n'est autorisé pendant l'épreuve.
+      </p>
+
+      <h2 style="color: black;">3.3 Récapitulatif des Conditions</h2>
+      <table >
+        <tr>
+          <th>Paramètre</th>
+          <th>Détail</th>
+        </tr>
+        <tr>
+          <td style="color: black;"><strong>Durée</strong></td>
+          <td style="color: black;">24 heures maximum</td>
+        </tr>
+        <tr>
+          <td style="color: black;"><strong>Mode</strong></td>
+          <td style="color: black;">Entièrement à distance</td>
+        </tr>
+        <tr>
+          <td style="color: black;"><strong>Outils IA</strong></td>
+          <td style="color: black;">Utilisation encouragée</td>
+        </tr>
+        <tr>
+          <td style="color: black;"><strong>Partage</strong></td>
+          <td style="color: black;">Aucun échange autorisé</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== SUBJECT 1 ========== -->
+  <section class="content-section">
+    <div class="content-box">
+      <h1 style="color: black;">4. Sujet 1 — Import-Export</h1>
+      <h2 style="color: black;">4.1 Contexte</h2>
+      <p style="color: black;">
+        Vous devez concevoir un <strong>site web professionnel</strong> pour une entreprise spécialisée dans le secteur de l'<strong>import-export</strong>.
+      </p>
+      <p style="color: black;">
+        Le site doit refléter un caractère <strong>international</strong>, fiable et professionnel avec un design moderne et des animations élégantes.
+      </p>
+
+      <h2 style="color: black;">4.2 Contenu Attendu</h2>
+      <ul>
+        <li style="color: black;">Page d'accueil moderne avec <strong>héros section</strong> impactante</li>
+        <li style="color: black;">Page <strong>À propos</strong> avec équipe et valeurs</li>
+        <li style="color: black;">Page <strong>Services</strong> détaillée</li>
+        <li style="color: black;">Page <strong>Contact</strong> avec formulaire fonctionnel</li>
+        <li style="color: black;"><strong>Galerie</strong> connectée à Google Drive</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== SUBJECT 2 ========== -->
+  <section class="content-section">
+    <div class="content-box">
+      <h1 style="color: black;">5. Sujet 2 — BTP & Transport</h1>
+      <h2 style="color: black;">5.1 Contexte</h2>
+      <p style="color: black;">
+        Le site doit représenter une entreprise spécialisée dans le <strong>BTP et le transport logistique</strong>.
+      </p>
+      <p style="color: black;">
+        Le design doit inspirer <strong>solidité</strong>, professionnalisme et fiabilité.
+      </p>
+
+      <h2 style="color: black;">5.2 Contenu Attendu</h2>
+      <ul style="color: black;">
+        <li style="color: black;">Page d'accueil avec <strong>image de chantier</strong> impactante</li>
+        <li style="color: black;"><strong>Présentation des projets</strong> réalisés</li>
+        <li style="color: black;"><strong>Services</strong> de transport et construction</li>
+        <li style="color: black;"><strong>Formulaire de devis</strong> intéractif</li>
+        <li style="color: black;"><strong>Galerie dynamique</strong> synchronisée</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== TECHNICAL SPECIFICATIONS ========== -->
+  <section class="content-section">
+    <div class="content-box">
+      <h1 style="color: black;">6. Spécifications Techniques</h1>
+      <p style="color: black;">
+        Votre solution devra respecter les spécifications techniques suivantes pour un rendu professionnel et optimisé.
+      </p>
+
+      <h2 style="color: black;">6.1 Pages Obligatoires</h2>
+      <ul style="color: black;">
+        <li style="color: black;">Page d'accueil (Homepage)</li>
+        <li style="color: black;">Page À propos (About)</li>
+        <li style="color: black;">Page Services</li>
+        <li style="color: black;">Page Portfolio/Galerie</li>
+        <li style="color: black;">Page Contact</li>
+        <li style="color: black;">Page Mentions Légales</li>
+      </ul>
+
+      <h2 style="color: black;">6.2 Intégration Google Drive</h2>
+      <p style="color: black;">
+        Une <strong>galerie dynamique</strong> connectée à Google Drive permettant l'affichage d'images et le partage de contenu.
+      </p>
+
+      <h2 style="color: black;">6.3 Chatbot IA</h2>
+      <p style="color: black;">
+        Intégration d'un <strong>chatbot intelligent</strong> pour l'assistance client et l'engagement utilisateur.
+      </p>
+
+      <h2 style="color: black;">6.4 Design Ultra Premium</h2>
+      <p style="color: black;">
+        Design <strong>moderne et attrayant</strong> reflétant le professionnalisme de l'entreprise. Palette de couleurs cohérente et typographie soignée.
+      </p>
+
+      <h2 style="color: black;">6.5 Animations & Performances</h2>
+      <ul style="color: black;">
+        <li style="color: black;">Animations fluides et performantes</li>
+        <li style="color: black;">Optimisation du temps de chargement</li>
+        <li style="color: black;">Score Lighthouse minimal de <strong>85/100</strong></li>
+      </ul>
+
+      <h2 style="color: black;">6.6 Responsive Design</h2>
+      <ul style="color: black;">
+        <li style="color: black;">Mobile-first approach</li>
+        <li style="color: black;">Compatible sur tous les écrans (desktop, tablet, mobile)</li>
+        <li style="color: black;">Cross-browser compatibility</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== EVALUATION CRITERIA ========== -->
+  <section class="content-section">
+    <div class="content-box">
+      <h1 style="color: black;">7. Critères d'Évaluation</h1>
+      <p style="color: black;">
+        Votre travail sera évalué selon les critères suivants :
+      </p>
+      <table>
+        <tr style="color: black;">
+          <th>Critère</th>
+          <th>Pondération</th>
+        </tr>
+        <tr style="color: black;">
+          <td style="color: black;"><strong>Qualité du Design</strong></td>
+          <td style="color: black;">25%</td>
+        </tr>
+        <tr style="color: black;">
+          <td style="color: black;"><strong>Fonctionnalités Implémentées</strong></td>
+          <td style="color: black;">25%</td>
+        </tr>
+        <tr style="color: black;">
+          <td style="color: black;"><strong>Optimisation & Performance</strong></td>
+          <td style="color: black;">20%</td>
+        </tr>
+        <tr style="color: black;">
+          <td style="color: black;"><strong>Responsive Design</strong></td>
+          <td style="color: black;">15%</td>
+        </tr>
+        <tr style="color: black;">
+          <td style="color: black;"><strong>Code Quality & Organisation</strong></td>
+          <td style="color: black;">15%</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========== TOOLS & TECHNOLOGIES ========== -->
+  <section class="content-section Content-Security-Policy:
+  {
+  key: "Content-Security-Policy",
+  value: `
+    font-src 'self'
+    *.vercel.com
+    *.gstatic.com
+    vercel.live
+    https://k2mkucxia43oc7fa.public.blob.vercel-storage.com;
+  `
+}
+  font-src 'self' *.vercel.com *.gstatic.com vercel.live https://k2mkucxia43oc7fa.public.blob.vercel-storage.com;">
+    <div class="content-box">
+      <h1 style="color: black;">8. Outils et Technologies</h1>
+      <h2 style="color: black;">8.1 Environnement de Développement</h2>
+      <ul>
+        <li style="color: black;">HTML5 & CSS3 (ou frameworks comme Tailwind, Bootstrap)</li>
+        <li style="color: black;">JavaScript moderne (ES6+)</li>
+        <li style="color: black;">Frameworks : React, Vue.js, Angular (optionnel)</li>
+        <li style="color: black;">Back-end : Node.js, Python, PHP</li>
+        <li style="color: black;">Bases de données : PostgreSQL, MongoDB</li>
+      </ul>
+
+      <h2 style="color: black;">8.2 Intelligence Artificielle</h2>
+      <p style="color: black;">
+        L'utilisation d'outils IA est <strong>vivement encouragée</strong> pour :
+      </p>
+      <ul>
+        <li style="color: black;">Génération de code et débograge</li>
+        <li style="color: black;">Optimisation des performances</li>
+        <li style="color: black;">Création de contenu et copywriting</li>
+        <li style="color: black;">Design et prototypage</li>
+      </ul>
+
+      <h2 style="color: black;">8.3 Frameworks et Bibliothèques</h2>
+      <ul>
+        <li style="color: black;"><strong>Frontend :</strong> React, Vue, Next.js, Svelte</li>
+        <li style="color: black;"><strong>Styling :</strong> Tailwind CSS, Sass, CSS-in-JS</li>
+        <li style="color: black;"><strong>Backend :</strong> Express, Django, Laravel</li>
+        <li style="color: black;"><strong>Database :</strong> Firebase, Supabase, ou SQL traditionnel</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== FINAL INSTRUCTIONS ========== -->
+  <section class="content-section">
+    <div class="content-box">
+      <h1 style="color: black;">9. Consignes Finales et Modalités de Soumission</h1>
+
+      <h2 style="color: black;">9.1 Livraison du Projet</h2>
+      <ul>
+        <li style="color: black;">Code source hébergé sur GitHub (public ou private avec accès fourni)</li>
+        <li style="color: black;">Site déployé et accessible en ligne (Vercel, Netlify, Heroku, etc.)</li>
+        <li style="color: black;">Documentation complète (README, instructions de déploiement)</li>
+        <li style="color: black;">Screenshots et démonstration fonctionnelle</li>
+      </ul>
+
+      <h2 style="color: black;">9.2 Règles et Intégrité</h2>
+      <ul>
+        <li style="color: black;"><strong>Respect du délai :</strong> 24 heures maximum</li>
+        <li style="color: black;"><strong>Originalité :</strong> Travail personnel (utilisation IA autorisée)</li>
+        <li style="color: black;"><strong>Communication :</strong> Aucun échange avec d'autres candidats</li>
+        <li style="color: black;"><strong>Confidentialité :</strong> Respect du caractère confidentiel du test</li>
+      </ul>
+
+      <h2 style="color: black;">9.3 Support et Contact</h2>
+      <p style="color: black;">
+        En cas de question ou de problème technique, veuillez contacter :
+      </p>
+      <ul>
+        <li style="color: black;"><strong>Email :</strong> recruitment@company.com</li>
+        <li style="color: black;"><strong>Support :</strong> Disponible 24h/24 pendant l'épreuve</li>
+      </ul>
+
+      <p style="  color: black;  text-align: center; align-items: center; justify-content: center;">
+        <strong style="color: black;">Bonne chance ! </strong><br>
+        Nous avons hâte de découvrir votre créativité et vos compétences.
+      </p>
+    </div>
+    
+  </section>
+
+</body>
+</html>
